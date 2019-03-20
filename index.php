@@ -28,7 +28,6 @@ if(!isset($_SESSION['user_id']))
    
    <h3 align="center" style="color: yellow;background-color: purple">Chat Application</a></h3><br />
    <br />
-   
 	   <div class="table-responsive">
 	    	<h3 align="center" style="color: black">Online User</h3>
 	    	<p align="right" style="color:yellow;font-size: 20px;">Hi <?php echo $_SESSION['username'];  ?>&nbsp; <a class="btn btn-primary" href="logout.php" role="button">-Logout</a>
@@ -76,7 +75,7 @@ $(document).ready(function(){
    }
   })
  }
-
+ 
  function make_chat_dialog_box(to_user_id, to_user_name)
  {
   var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="To '+to_user_name+'">';

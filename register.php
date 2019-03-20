@@ -35,7 +35,7 @@ if(isset($_POST['register']))
 			{
 				if($password != $_POST['confirm_password'])
 				{
-					$message .='<p><label> Password not match</label></p>';
+					$message .='<p><label> Password does not match</label></p>';
 				}
 			}
 			if($message == "")
@@ -74,10 +74,7 @@ if(isset($_POST['register']))
 		<h2 align="center" style="color: yellow;background-color: purple;">Chat Application</h2>
 		<div class="panel-heading" style="color: black;"><h3>Register Here</h3>
 		</div>
-		<p class="message" style="color:green">
-			<?php echo $message; ?>
-			
-		</p>
+		<p class="text-success"><?php echo $message; ?></p>
 			<div class="panel-body" style="background-color:lightgrey;opacity: 0.8;"">
 				<form method="post">
 				<div class="form-group" style="color: yellow;">

@@ -30,7 +30,7 @@ if(isset($_POST['submit']))
 			$query = "UPDATE login SET username ='$username' WHERE user_id = $id";
 			$statement=$connect->prepare($query);
 			$statement->execute();
-			$message .= "Success...";
+			$message .= "Done :)";
 		}
 	}
 }
@@ -64,10 +64,10 @@ if(isset($_POST['submit']))
 								<label style="color: #1a6f7a;">Update username :</label><br>
 								<input class="input" type="text" name="username" placeholder="Enter new username" autocomplete="off" /> 
 								<br><br>
-								<label style="color: #1a6f7a;">Enter Password</label><br>
+								<!-- <label style="color: #1a6f7a;">Enter Password</label><br>
 								<input class="input" type="password" name="password" placeholder="Enter password" />
-								<br><br>
-								<input type="submit" name="submit" value="Update">
+								<br><br> -->
+								<input type="submit" name="submit" value="Just Do It">
 						</fieldset>
 					</div>
 				</form>
