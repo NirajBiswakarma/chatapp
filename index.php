@@ -8,7 +8,6 @@ if(!isset($_SESSION['user_id']))
 {
  header("location:login.php");
 }
-$id = $_SESSION['user_id'];
 
 ?>
 
@@ -29,40 +28,19 @@ $id = $_SESSION['user_id'];
    
    <h3 align="center" style="color: yellow;background-color: purple">Chat Application</a></h3><br />
    <br />
-   <div class="row">
-   		<div class="col-md-8 col-sm-6">
-   			<h3 align="center" style="color: black">Online User</h3>
-   		</div>
-   		<div class="col-md-2 col-sm-3">
-   			<input type="hidden" id="is_active_group_chat_window" value="no"/>
-   			<button type="button" name="group_chat" id="group_chat" class="btn btn-warning btn-xs">Group Chat</button>
-   		</div>
-   		<div class="col-md-2 col-sm-3">
-   		<p align="right" style="color:yellow;">Hi -<?php echo $_SESSION['username'];  ?>-<a href="logout.php">Logout</a></p>
-   			
-   		</div>
-   </div>
    
 	   <div class="table-responsive">
+	    	<h3 align="center" style="color: black">Online User</h3>
+	    	<p align="right" style="color:yellow;font-size: 20px;">Hi <?php echo $_SESSION['username'];  ?>&nbsp; <a class="btn btn-primary" href="logout.php" role="button">-Logout</a>
 	    	<div id="user_details"></div>
 	    	<div id="user_model_details"></div>
 	   </div>
-	<a class="btn btn-lg btn-outline-primary" href="<?php echo "user_settings.php?user_id=".$id; ?>">Settings</a> 
+	<a class="btn btn-md btn-success" href="<?php echo "user_settings.php?user_id=".$_SESSION['user_id']; ?>">Settings</a> 
      <!-- using echo php url parameters added -->
 </div>
     </body>  
 </html>  
 
-<div id="group_chat_dialog" title="Group Chat Window">
-	<div id="group_chat_history" style="height: 400px;border:1px solid #ccc;overflow-y: scroll;margin-bottom: 24px;pad:16px;">	
-	</div>
-	<div class="form-group">
-		<textarea name="group_chat_message" id="group_chat_message" class="form-control"></textarea>
-	</div>
-	<div class="form-group" align="right">
-		<button type="button" name="send_group_chat" id="send_group_chat" class="btn btn-info">Send</button>
-	</div>
-</div>
 
 
 
@@ -75,8 +53,7 @@ $(document).ready(function(){
   update_last_activity();
   fetch_user();
   update_chat_history_data();
-  fetch_user_chat_history();
- }, 5000);
+ }, 3000);
 
  function fetch_user()
  {
@@ -102,7 +79,7 @@ $(document).ready(function(){
 
  function make_chat_dialog_box(to_user_id, to_user_name)
  {
-  var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="You have chat with '+to_user_name+'">';
+  var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="To '+to_user_name+'">';
   modal_content += '<div style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
   modal_content += fetch_user_chat_history(to_user_id);
   modal_content += '</div>';
@@ -194,52 +171,6 @@ $(document).ready(function(){
    }
   })
  });
-
-
- $('#group_chat_dialog').dialog({
- 	autoOpen:false,
- 	width:400
-
- })
- $('#group_chat').click(function(){
- 	$('#group_chat_dialog').dialog('open');
- 	$('#is_active_group_chat_window').val('yes');
- 	fetch_user_chat_history();
- });
-
- $('#send_group_chat').click(function(){
- 	var chat_message = $('#group_chat_message').val();
- 	var action = 'insert_data';
- 	if(chat_message!=''){
- 		$ajax({
- 			url:"group_chat.php",
- 			method:"POST",
- 			data:{chat_message:chat_message,action:action},
- 			success:function(data){
- 				$('#group_chat_message').val('');
- 				$('#group_chat_history').html(data);
- 			}
- 		})
- 	}
-
- });
  
- function fetch_group_chat_history()
- {
- 	var grou_chat_dialog_active = $('#is_active_group_chat_window').val();
- 	var action = "fetch_data";
- 	if(grou_chat_dialog_active == 'yes')
- 	{
- 		$.ajax({
- 			url:"group_chat.php",
- 			method:"POST",
- 			data:{action:action},
- 			success:function(data)
- 			{
- 				$('#group_chat_history').html(data);
- 			}
- 		})
- 	}
- }
 });  
 </script>

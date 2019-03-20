@@ -20,12 +20,12 @@ if(isset($_POST["login"]))
 		$result = $statement->fetchAll();
 		foreach($result as $row) 
 		{
-			if($_POST['password'] === $row['password']) //Directly checking equality.....
+			if(password_verify($_POST["password"], $row["password"])) 
 			{
 				$_SESSION['user_id'] = $row['user_id'];
 				$_SESSION['username'] = $row['username'];
 				$sub_query = "
-					INSERT INTO  login_details(user_id) VALUES('".$row['user_id']."')
+					INSERT INTO login_details(user_id) VALUES('".$row['user_id']."')
 					";
 					$statement = $connect->prepare($sub_query);
 					$statement->execute();

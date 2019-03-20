@@ -1,13 +1,12 @@
 <?php
 
-
 include('database_connection.php');
 
 session_start();
 
 $query = "
 SELECT * FROM login 
-WHERE user_id != '".$_SESSION['user_id']."' 
+WHERE user_id != '".$_SESSION['user_id']."'ORDER BY username ASC
 ";
 
 $statement = $connect->prepare($query);
