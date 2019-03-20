@@ -21,16 +21,16 @@ if(isset($_POST['submit']))
 		{
 			$message .='<p><label>Username already taken</label></p>';
 		}
-		if(empty($username))
-		{
-			$message .='<p><label> Username is required</label></p>';
-		}
+		elseif(empty($username))
+			{
+				$message .='<p><label> Username is required</label></p>';
+			}
 		else
-		{
-		$query = "UPDATE login SET username ='$username' WHERE user_id = $id";
-		$statement=$connect->prepare($query);
-		$statement->execute();
-		$message .= "Success...";	
+		{	
+			$query = "UPDATE login SET username ='$username' WHERE user_id = $id";
+			$statement=$connect->prepare($query);
+			$statement->execute();
+			$message .= "Success...";
 		}
 	}
 }
